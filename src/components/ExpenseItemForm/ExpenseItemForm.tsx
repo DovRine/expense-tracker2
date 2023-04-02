@@ -1,9 +1,9 @@
+'use client';
 import './ExpenseItemForm.scss';
 import {toInteger} from '@/lib/toInteger';
-import {fetchCategories} from '@/lib/fetchCategories';
 import {fetchExpenses} from '@/lib/fetchExpenses';
-import {Expense} from '@/models';
-import {Dispatch, SetStateAction, useState, use} from 'react';
+import {Category, Expense} from '@/models';
+import {Dispatch, SetStateAction, useState, useEffect} from 'react';
 
 // NOTE: empty first element to account for months 1-12
 const months = [
@@ -22,6 +22,11 @@ const months = [
   'Dec',
 ];
 
+async function listCategories() {
+  const url = 'http://localhost:5000/api/category';
+  const response = await fetch(url);
+  return (await response.json()) as Category[];
+}
 async function createExpense(expense: Expense) {
   const url = 'http://localhost:5000/api/expense';
   await fetch(url, {
@@ -47,6 +52,10 @@ function ExpenseItemForm({
   setShowEditForm: Dispatch<SetStateAction<boolean>>;
   setExpenses: Dispatch<SetStateAction<Expense[]>>;
 }) {
+  const [categories, setCategories] = useState<Category[]>([]);
+  useEffect(() => {
+    listCategories().then(res => setCategories(res));
+  }, []);
   const now = new Date();
   const [month, setMonth] = useState(
     expense ? expense.month : now.getMonth() + 1
@@ -56,7 +65,6 @@ function ExpenseItemForm({
     expense ? expense.category_id : 1
   );
   const [amount, setAmount] = useState(expense ? expense.amount : 0);
-  const categories = use(fetchCategories());
   const currentYear = new Date().getFullYear();
   const yearOptions = [];
   for (let i = year - 7; i <= currentYear; i++) {

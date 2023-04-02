@@ -11,7 +11,6 @@ export async function GET(request: Request, context: {params: {id: number}}) {
 export async function PUT(request: Request, context: {params: {id: number}}) {
   const id = context.params.id;
   const newExpense = (await request.json()) as Expense;
-  console.log({newExpense});
   try {
     await updateExpense(id, newExpense);
     return NextResponse.json({status: 'ok'});

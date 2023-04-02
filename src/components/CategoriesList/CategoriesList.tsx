@@ -3,15 +3,16 @@ import './CategoriesList.scss';
 import {CategoryItem} from '@/components/CategoryItem';
 import {fetchCategories} from '@/lib/fetchCategories';
 import {Category} from '@/models';
-import {use, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {CategoryItemForm} from '../CategoryItemForm';
 import {Button} from '../Button';
 
 function CategoriesList() {
-  use<Category[]>(fetchCategories());
-  const cachedCategories = use<Category[]>(fetchCategories());
+  const [categories, setCategories] = useState<Category[]>([]);
   const [showCategoryForm, setShowCategoryForm] = useState(false);
-  const [expenses, setCategories] = useState(cachedCategories);
+  useEffect(() => {
+    fetchCategories().then(res => setCategories(res));
+  }, []);
 
   return (
     <div className="CategoriesList">
@@ -28,7 +29,7 @@ function CategoriesList() {
         />
       )}
       <div>
-        {expenses.map(category => (
+        {categories.map(category => (
           <CategoryItem
             key={category.id}
             category={category}

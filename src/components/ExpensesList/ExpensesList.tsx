@@ -1,20 +1,18 @@
 'use client';
 import './ExpensesList.scss';
 import {ExpenseItem} from '@/components/ExpenseItem';
-import {fetchCategories} from '@/lib/fetchCategories';
 import {fetchExpenses} from '@/lib/fetchExpenses';
-import {Category, Expense} from '@/models';
-import {use, useState} from 'react';
+import {Expense} from '@/models';
+import {useEffect, useState} from 'react';
 import {ExpenseItemForm} from '../ExpenseItemForm';
 import {Button} from '../Button';
 
 function ExpensesList() {
-  // NOTE: this is preloading the categories even though they're not used here
-  use<Category[]>(fetchCategories());
-  const cachedExpenses = use<Expense[]>(fetchExpenses());
+  const [expenses, setExpenses] = useState<Expense[]>([]);
+  useEffect(() => {
+    fetchExpenses().then(res => setExpenses(res));
+  }, []);
   const [showExpenseForm, setShowExpenseForm] = useState(false);
-  const [expenses, setExpenses] = useState(cachedExpenses);
-
   return (
     <div className="ExpensesList">
       {showExpenseForm ? (

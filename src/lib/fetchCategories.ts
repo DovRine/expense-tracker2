@@ -13,4 +13,4 @@ const fetchCategories: FetchCategories = cache(
   (cacheBuster?: string | number) => doFetch(cacheBuster)
 );
 
-export {fetchCategories};
+export {fetchCategories, doFetch};

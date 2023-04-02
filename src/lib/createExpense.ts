@@ -9,7 +9,6 @@ async function createExpense(expense: Expense): Promise<number> {
 
   validateExpense(expense);
 
-  console.log({expense});
   const {year, month, amount, category_id} = expense;
 
   // TODO: convert to parameterized query
