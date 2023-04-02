@@ -4,7 +4,7 @@ import { BtnEdit } from "./BtnEdit";
 import { BtnDelete } from "./BtnDelete";
 import { Expense } from "@/models";
 import { Dispatch, SetStateAction, useState } from "react";
-import { ExpenseItemForm } from "./ExpenseItemForm";
+import { ExpenseItemForm } from "../ExpenseItemForm";
 
 function ExpenseItem({
   expense,

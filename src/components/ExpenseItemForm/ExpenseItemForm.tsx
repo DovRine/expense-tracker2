@@ -1,3 +1,4 @@
+import "./ExpenseItemForm.scss";
 import { toInteger } from "@/lib/toInteger";
 import { fetchCategories } from "@/lib/fetchCategories";
 import { fetchExpenses } from "@/lib/fetchExpenses";
@@ -21,8 +22,16 @@ const months = [
   "Dec",
 ];
 
-async function updateExpense(id: number, expense: Expense) {
-  const url = `http://localhost:5000/api/expense/${id}`;
+async function createExpense(expense: Expense) {
+  const url = `http://localhost:5000/api/expense`;
+  await fetch(url, {
+    method: "POST",
+    body: JSON.stringify(expense),
+  });
+}
+
+async function updateExpense(expense: Expense) {
+  const url = `http://localhost:5000/api/expense/${expense.id}`;
   await fetch(url, {
     method: "PUT",
     body: JSON.stringify(expense),
@@ -34,14 +43,19 @@ function ExpenseItemForm({
   setShowEditForm,
   setExpenses,
 }: {
-  expense: Expense;
+  expense?: Expense;
   setShowEditForm: Dispatch<SetStateAction<boolean>>;
   setExpenses: Dispatch<SetStateAction<Expense[]>>;
 }) {
-  const [month, setMonth] = useState(expense.month);
-  const [year, setYear] = useState(expense.year);
-  const [category_id, setCategory_id] = useState(expense.category_id);
-  const [amount, setAmount] = useState(expense.amount);
+  const now = new Date();
+  const [month, setMonth] = useState(
+    expense ? expense.month : now.getMonth() + 1
+  );
+  const [year, setYear] = useState(expense ? expense.year : now.getFullYear());
+  const [category_id, setCategory_id] = useState(
+    expense ? expense.category_id : 1
+  );
+  const [amount, setAmount] = useState(expense ? expense.amount : 0);
   const categories = use(fetchCategories());
   const currentYear = new Date().getFullYear();
   const yearOptions = [];
@@ -54,7 +68,7 @@ function ExpenseItemForm({
   }
 
   return (
-    <>
+    <div className="ExpenseItemForm">
       <div>
         <select
           name="month"
@@ -107,16 +121,19 @@ function ExpenseItemForm({
         <button
           type="button"
           onClick={async () => {
-            const id = expense.id!;
-            const updatedExpense = {
-              id,
-              year,
-              month,
-              category_id,
-              amount: toInteger(amount),
-            };
             try {
-              await updateExpense(id, updatedExpense);
+              let expenseData: Expense = {
+                year,
+                month,
+                amount: toInteger(amount),
+                category_id,
+              };
+              if (expense) {
+                expenseData.id = expense.id!;
+                await updateExpense(expenseData);
+              } else {
+                await createExpense(expenseData);
+              }
               const expenses = await fetchExpenses(new Date().getTime());
               setExpenses(expenses);
             } catch (e) {
@@ -127,10 +144,10 @@ function ExpenseItemForm({
             }
           }}
         >
-          Edit
+          {expense ? "Edit" : "Add"}
         </button>
       </div>
-    </>
+    </div>
   );
 }
 export { ExpenseItemForm };

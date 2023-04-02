@@ -1,6 +1,15 @@
-function BtnNew() {
+function BtnNew({
+  setShowExpenseForm,
+}: {
+  setShowExpenseForm: Dispatch<SetStateAction<boolean>>;
+}) {
   return (
-    <button className="BtnNew" onClick={() => console.log("new")}>
+    <button
+      className="BtnNew"
+      onClick={() => {
+        setShowExpenseForm(true);
+      }}
+    >
       New
     </button>
   );
