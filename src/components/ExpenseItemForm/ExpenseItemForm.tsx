@@ -1,31 +1,31 @@
-import "./ExpenseItemForm.scss";
-import { toInteger } from "@/lib/toInteger";
-import { fetchCategories } from "@/lib/fetchCategories";
-import { fetchExpenses } from "@/lib/fetchExpenses";
-import { Expense } from "@/models";
-import { Dispatch, SetStateAction, useState, use } from "react";
+import './ExpenseItemForm.scss';
+import {toInteger} from '@/lib/toInteger';
+import {fetchCategories} from '@/lib/fetchCategories';
+import {fetchExpenses} from '@/lib/fetchExpenses';
+import {Expense} from '@/models';
+import {Dispatch, SetStateAction, useState, use} from 'react';
 
 // NOTE: empty first element to account for months 1-12
 const months = [
-  "",
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
+  '',
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
 ];
 
 async function createExpense(expense: Expense) {
-  const url = `http://localhost:5000/api/expense`;
+  const url = 'http://localhost:5000/api/expense';
   await fetch(url, {
-    method: "POST",
+    method: 'POST',
     body: JSON.stringify(expense),
   });
 }
@@ -33,7 +33,7 @@ async function createExpense(expense: Expense) {
 async function updateExpense(expense: Expense) {
   const url = `http://localhost:5000/api/expense/${expense.id}`;
   await fetch(url, {
-    method: "PUT",
+    method: 'PUT',
     body: JSON.stringify(expense),
   });
 }
@@ -60,11 +60,11 @@ function ExpenseItemForm({
   const currentYear = new Date().getFullYear();
   const yearOptions = [];
   for (let i = year - 7; i <= currentYear; i++) {
-    yearOptions.push({ value: i, label: i });
+    yearOptions.push({value: i, label: i});
   }
   const monthOptions = [];
   for (let i = 1; i <= 12; i++) {
-    monthOptions.push({ value: i, label: `${i} ${months[i]}` });
+    monthOptions.push({value: i, label: `${i} ${months[i]}`});
   }
 
   return (
@@ -73,9 +73,9 @@ function ExpenseItemForm({
         <select
           name="month"
           value={month}
-          onChange={(e) => setMonth(Number(e.currentTarget.value))}
+          onChange={e => setMonth(Number(e.currentTarget.value))}
         >
-          {monthOptions.map(({ label, value }) => (
+          {monthOptions.map(({label, value}) => (
             <option key={value} value={value}>
               {label}
             </option>
@@ -84,9 +84,9 @@ function ExpenseItemForm({
         <select
           name="year"
           value={year}
-          onChange={(e) => setYear(Number(e.currentTarget.value))}
+          onChange={e => setYear(Number(e.currentTarget.value))}
         >
-          {yearOptions.map(({ label, value }) => (
+          {yearOptions.map(({label, value}) => (
             <option key={value} value={value}>
               {label}
             </option>
@@ -97,13 +97,13 @@ function ExpenseItemForm({
         <select
           name="category_id"
           value={category_id}
-          onChange={(e) => setCategory_id(Number(e.currentTarget.value))}
+          onChange={e => setCategory_id(Number(e.currentTarget.value))}
         >
-          {categories.map((category) => (
+          {categories.map(category => (
             <option key={category.id} value={category.id}>
               {category.name}
             </option>
-          ))}{" "}
+          ))}{' '}
         </select>
       </div>
       <div>
@@ -111,7 +111,7 @@ function ExpenseItemForm({
           type="number"
           step="0.01"
           value={amount}
-          onChange={(e) => setAmount(Number(e.currentTarget.value))}
+          onChange={e => setAmount(Number(e.currentTarget.value))}
         />
       </div>
       <div>
@@ -122,7 +122,7 @@ function ExpenseItemForm({
           type="button"
           onClick={async () => {
             try {
-              let expenseData: Expense = {
+              const expenseData: Expense = {
                 year,
                 month,
                 amount: toInteger(amount),
@@ -144,10 +144,10 @@ function ExpenseItemForm({
             }
           }}
         >
-          {expense ? "Edit" : "Add"}
+          {expense ? 'Edit' : 'Add'}
         </button>
       </div>
     </div>
   );
 }
-export { ExpenseItemForm };
+export {ExpenseItemForm};

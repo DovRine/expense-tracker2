@@ -1,11 +1,11 @@
-"use client";
-import "./CategoriesList.scss";
-import { CategoryItem } from "@/components/CategoryItem";
-import { fetchCategories } from "@/lib/fetchCategories";
-import { Category } from "@/models";
-import { use, useState } from "react";
-import { CategoryItemForm } from "../CategoryItemForm";
-import { Button } from "../Button";
+'use client';
+import './CategoriesList.scss';
+import {CategoryItem} from '@/components/CategoryItem';
+import {fetchCategories} from '@/lib/fetchCategories';
+import {Category} from '@/models';
+import {use, useState} from 'react';
+import {CategoryItemForm} from '../CategoryItemForm';
+import {Button} from '../Button';
 
 function CategoriesList() {
   use<Category[]>(fetchCategories());
@@ -28,7 +28,7 @@ function CategoriesList() {
         />
       )}
       <div>
-        {expenses.map((category) => (
+        {expenses.map(category => (
           <CategoryItem
             key={category.id}
             category={category}
@@ -40,4 +40,4 @@ function CategoriesList() {
   );
 }
 
-export { CategoriesList };
+export {CategoriesList};

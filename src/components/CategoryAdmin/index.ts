@@ -1,1 +1,1 @@
-export { CategoryAdmin } from './CategoryAdmin'
+export {CategoryAdmin} from './CategoryAdmin';

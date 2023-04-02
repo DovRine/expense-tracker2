@@ -1,12 +1,12 @@
-import "./CategoryItemForm.scss";
-import { fetchCategories } from "@/lib/fetchCategories";
-import { Category } from "@/models";
-import { Dispatch, SetStateAction, useState } from "react";
+import './CategoryItemForm.scss';
+import {fetchCategories} from '@/lib/fetchCategories';
+import {Category} from '@/models';
+import {Dispatch, SetStateAction, useState} from 'react';
 
 async function createCategory(category: Category) {
-  const url = `http://localhost:5000/api/category`;
+  const url = 'http://localhost:5000/api/category';
   await fetch(url, {
-    method: "POST",
+    method: 'POST',
     body: JSON.stringify(category),
   });
 }
@@ -14,7 +14,7 @@ async function createCategory(category: Category) {
 async function updateCategory(category: Category) {
   const url = `http://localhost:5000/api/category/${category.id}`;
   await fetch(url, {
-    method: "PUT",
+    method: 'PUT',
     body: JSON.stringify(category),
   });
 }
@@ -28,7 +28,7 @@ function CategoryItemForm({
   setShowEditForm: Dispatch<SetStateAction<boolean>>;
   setCategories: Dispatch<SetStateAction<Category[]>>;
 }) {
-  const [name, setName] = useState(category ? category.name : "");
+  const [name, setName] = useState(category ? category.name : '');
 
   return (
     <div className="CategoryItemForm">
@@ -36,7 +36,7 @@ function CategoryItemForm({
         <input
           type="text"
           value={name}
-          onChange={(e) => setName(e.currentTarget.value)}
+          onChange={e => setName(e.currentTarget.value)}
         />
       </div>
       <div>
@@ -47,7 +47,7 @@ function CategoryItemForm({
           type="button"
           onClick={async () => {
             try {
-              let categoryData: Category = { name };
+              const categoryData: Category = {name};
               if (category) {
                 categoryData.id = category.id!;
                 await updateCategory(categoryData);
@@ -64,10 +64,10 @@ function CategoryItemForm({
             }
           }}
         >
-          {category ? "Edit" : "Add"}
+          {category ? 'Edit' : 'Add'}
         </button>
       </div>
     </div>
   );
 }
-export { CategoryItemForm };
+export {CategoryItemForm};

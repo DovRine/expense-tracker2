@@ -1,12 +1,12 @@
-"use client";
-import "./ExpensesList.scss";
-import { ExpenseItem } from "@/components/ExpenseItem";
-import { fetchCategories } from "@/lib/fetchCategories";
-import { fetchExpenses } from "@/lib/fetchExpenses";
-import { Category, Expense } from "@/models";
-import { use, useState } from "react";
-import { ExpenseItemForm } from "../ExpenseItemForm";
-import { Button } from "../Button";
+'use client';
+import './ExpensesList.scss';
+import {ExpenseItem} from '@/components/ExpenseItem';
+import {fetchCategories} from '@/lib/fetchCategories';
+import {fetchExpenses} from '@/lib/fetchExpenses';
+import {Category, Expense} from '@/models';
+import {use, useState} from 'react';
+import {ExpenseItemForm} from '../ExpenseItemForm';
+import {Button} from '../Button';
 
 function ExpensesList() {
   // NOTE: this is preloading the categories even though they're not used here
@@ -30,7 +30,7 @@ function ExpensesList() {
         />
       )}
       <div>
-        {expenses.map((expense) => (
+        {expenses.map(expense => (
           <ExpenseItem
             key={expense.id}
             expense={expense}
@@ -42,4 +42,4 @@ function ExpensesList() {
   );
 }
 
-export { ExpensesList };
+export {ExpensesList};

@@ -1,12 +1,12 @@
-import { Dispatch, SetStateAction } from "react";
-import "./CategoryAdmin.scss";
-import { Button } from "../Button";
-import { CategoriesList } from "../CategoriesList";
+import {Dispatch, SetStateAction} from 'react';
+import './CategoryAdmin.scss';
+import {Button} from '../Button';
+import {CategoriesList} from '../CategoriesList';
 
 type Props = {
   setShowCategoryAdmin: Dispatch<SetStateAction<boolean>>;
 };
-function CategoryAdmin({ setShowCategoryAdmin }: Props) {
+function CategoryAdmin({setShowCategoryAdmin}: Props) {
   return (
     <div className="CategoryAdmin">
       <Button
@@ -20,4 +20,4 @@ function CategoryAdmin({ setShowCategoryAdmin }: Props) {
   );
 }
 
-export { CategoryAdmin };
+export {CategoryAdmin};

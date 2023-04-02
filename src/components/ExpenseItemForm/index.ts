@@ -1,1 +1,1 @@
-export { ExpenseItemForm } from './ExpenseItemForm'
+export {ExpenseItemForm} from './ExpenseItemForm';

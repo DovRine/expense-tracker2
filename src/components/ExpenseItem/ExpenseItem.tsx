@@ -1,11 +1,11 @@
-"use client";
-import "./ExpenseItem.scss";
-import { Expense } from "@/models";
-import { Dispatch, SetStateAction, useState } from "react";
-import { ExpenseItemForm } from "../ExpenseItemForm";
-import { Button } from "../Button";
-import { fetchExpenses } from "@/lib/fetchExpenses";
-import { deleteExpense } from "./deleteExpense";
+'use client';
+import './ExpenseItem.scss';
+import {Expense} from '@/models';
+import {Dispatch, SetStateAction, useState} from 'react';
+import {ExpenseItemForm} from '../ExpenseItemForm';
+import {Button} from '../Button';
+import {fetchExpenses} from '@/lib/fetchExpenses';
+import {deleteExpense} from './deleteExpense';
 
 function ExpenseItem({
   expense,
@@ -17,7 +17,7 @@ function ExpenseItem({
   const [showEditForm, setShowEditForm] = useState(false);
 
   if (!expense) return null;
-  const { year, month, amount, category } = expense;
+  const {year, month, amount, category} = expense;
 
   return (
     <div className="ExpenseItem">
@@ -34,9 +34,9 @@ function ExpenseItem({
           </div>
           <div className="category">{category}</div>
           <div className="amount">
-            {new Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: "USD",
+            {new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'USD',
             }).format(amount)}
           </div>
           <div className="toolbar">
@@ -60,4 +60,4 @@ function ExpenseItem({
     </div>
   );
 }
-export { ExpenseItem };
+export {ExpenseItem};

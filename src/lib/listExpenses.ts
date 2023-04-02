@@ -1,12 +1,12 @@
-import { Expense } from "@/models"
-import { conn as db, toDecimal } from '@/lib'
+import {Expense} from '@/models';
+import {conn as db, toDecimal} from '@/lib';
 
 async function listExpenses(): Promise<Expense[]> {
-    if (!db) {
-        throw new Error('db is unavailable');
-    }
+  if (!db) {
+    throw new Error('db is unavailable');
+  }
 
-    const query = /*sql*/ `
+  const query = /*sql*/ `
     SELECT
         e.id,
         e.year,
@@ -19,11 +19,11 @@ async function listExpenses(): Promise<Expense[]> {
         ON e.category_id = c.id
     ORDER by e.id DESC
     `;
-    const { rows } = await db.query(query);
-    return rows.map(expense => ({
-        ...expense,
-        amount: toDecimal(expense.amount)
-    }))
+  const {rows} = await db.query(query);
+  return rows.map(expense => ({
+    ...expense,
+    amount: toDecimal(expense.amount),
+  }));
 }
 
-export { listExpenses }
+export {listExpenses};

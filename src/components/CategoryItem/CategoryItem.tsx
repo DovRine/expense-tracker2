@@ -1,11 +1,11 @@
-"use client";
-import "./CategoryItem.scss";
-import { Category } from "@/models";
-import { Dispatch, SetStateAction, useState } from "react";
-import { CategoryItemForm } from "../CategoryItemForm";
-import { Button } from "../Button";
-import { fetchCategories } from "@/lib/fetchCategories";
-import { deleteCategory } from "./deleteCategory";
+'use client';
+import './CategoryItem.scss';
+import {Category} from '@/models';
+import {Dispatch, SetStateAction, useState} from 'react';
+import {CategoryItemForm} from '../CategoryItemForm';
+import {Button} from '../Button';
+import {fetchCategories} from '@/lib/fetchCategories';
+import {deleteCategory} from './deleteCategory';
 
 function CategoryItem({
   category,
@@ -17,7 +17,7 @@ function CategoryItem({
   const [showEditForm, setShowEditForm] = useState(false);
 
   if (!category) return null;
-  const { name } = category;
+  const {name} = category;
 
   return (
     <div className="CategoryItem">
@@ -51,4 +51,4 @@ function CategoryItem({
     </div>
   );
 }
-export { CategoryItem };
+export {CategoryItem};

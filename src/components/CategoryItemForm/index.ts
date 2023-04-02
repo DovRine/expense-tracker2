@@ -1,1 +1,1 @@
-export { CategoryItemForm } from './CategoryItemForm'
+export {CategoryItemForm} from './CategoryItemForm';
