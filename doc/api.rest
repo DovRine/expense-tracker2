@@ -1,0 +1,65 @@
+GET http://localhost:5000/api/expense
+
+###
+
+GET http://localhost:5000/api/expense/2
+
+###
+
+POST http://localhost:5000/api/expense
+
+{
+    "year": 2022,
+    "month": 12,
+    "amount": 88888,
+    "category_id": 1
+}
+
+###
+
+PUT http://localhost:5000/api/expense/2
+
+{
+    "year": 1976,
+    "month": 3,
+    "amount": 77777, 
+    "category_id": 1
+}
+
+###
+
+DELETE http://localhost:5000/api/expense/3
+
+
+
+
+###
+
+GET http://localhost:5000/api/category
+
+###
+
+GET http://localhost:5000/api/category/3
+
+###
+
+POST http://localhost:5000/api/category
+
+{
+    "name": "HSA"
+}
+
+###
+
+
+PUT http://localhost:5000/api/category/3
+
+{
+    "name": "HSA: Remimburse"
+}
+
+###
+
+DELETE http://localhost:5000/api/category/4
+
+

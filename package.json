@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "export PORT=$(/bin/grep PORT -m1 .env | cut -d'=' -f 2) && next dev -p $PORT && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -15,8 +15,14 @@
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
     "next": "13.2.4",
+    "pg": "^8.10.0",
+    "pg-native": "^3.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "sass": "^1.60.0",
     "typescript": "5.0.3"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.6.6"
   }
 }
