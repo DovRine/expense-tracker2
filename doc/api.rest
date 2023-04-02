@@ -9,10 +9,10 @@ GET http://localhost:5000/api/expense/2
 POST http://localhost:5000/api/expense
 
 {
-    "year": 2022,
-    "month": 12,
-    "amount": 88888,
-    "category_id": 1
+    "year": 2023,
+    "month": 8,
+    "amount": 55555,
+    "category_id": 3
 }
 
 ###
@@ -55,7 +55,7 @@ POST http://localhost:5000/api/category
 PUT http://localhost:5000/api/category/3
 
 {
-    "name": "HSA: Remimburse"
+    "name": "HSA: Reimburse"
 }
 
 ###

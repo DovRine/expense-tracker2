@@ -1,3 +1,5 @@
+import { Expense } from "@/models";
+
 /**
  * @amount: integer
  * 
@@ -13,6 +15,7 @@ function toDecimal(amount: Expense['amount']): number {
     if (typeof amount !== 'number') {
         throw new Error('amount must be a number')
     }
+
 
     const s = String(amount).padStart(2, '0');
 
