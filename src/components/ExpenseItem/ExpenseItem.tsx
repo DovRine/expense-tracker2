@@ -1,10 +1,11 @@
 "use client";
 import "./ExpenseItem.scss";
-import { BtnEdit } from "./BtnEdit";
-import { BtnDelete } from "./BtnDelete";
 import { Expense } from "@/models";
 import { Dispatch, SetStateAction, useState } from "react";
 import { ExpenseItemForm } from "../ExpenseItemForm";
+import { Button } from "../Button";
+import { fetchExpenses } from "@/lib/fetchExpenses";
+import { deleteExpense } from "./deleteExpense";
 
 function ExpenseItem({
   expense,
@@ -39,8 +40,20 @@ function ExpenseItem({
             }).format(amount)}
           </div>
           <div className="toolbar">
-            <BtnEdit id={expense.id!} setShowEditForm={setShowEditForm} />
-            <BtnDelete id={expense.id!} setExpenses={setExpenses} />
+            <Button
+              classes="BtnEdit"
+              onClick={() => setShowEditForm(true)}
+              label="Edit"
+            />
+            <Button
+              classes="BtnDelete"
+              onClick={async () => {
+                await deleteExpense(expense.id!);
+                const expenses = await fetchExpenses(new Date().getTime());
+                setExpenses(expenses);
+              }}
+              label="Delete"
+            />
           </div>
         </>
       )}

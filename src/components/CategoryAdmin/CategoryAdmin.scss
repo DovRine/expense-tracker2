@@ -1,0 +1,16 @@
+.CategoryAdmin {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+
+  h1 {
+    text-align: center;
+  }
+
+  .BtnClose {
+    background: red;
+    color: white;
+    font-weight: bold;
+    height: 3rem;
+  }
+}

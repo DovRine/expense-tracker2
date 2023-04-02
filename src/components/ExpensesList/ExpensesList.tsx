@@ -5,8 +5,8 @@ import { fetchCategories } from "@/lib/fetchCategories";
 import { fetchExpenses } from "@/lib/fetchExpenses";
 import { Category, Expense } from "@/models";
 import { use, useState } from "react";
-import { BtnNew } from "./BtnNew";
 import { ExpenseItemForm } from "../ExpenseItemForm";
+import { Button } from "../Button";
 
 function ExpensesList() {
   // NOTE: this is preloading the categories even though they're not used here
@@ -23,7 +23,11 @@ function ExpensesList() {
           setExpenses={setExpenses}
         />
       ) : (
-        <BtnNew setShowExpenseForm={setShowExpenseForm} />
+        <Button
+          classes="BtnNew"
+          onClick={() => setShowExpenseForm(true)}
+          label="New"
+        />
       )}
       <div>
         {expenses.map((expense) => (

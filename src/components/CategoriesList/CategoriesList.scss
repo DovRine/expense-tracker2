@@ -1,0 +1,12 @@
+.CategoriesList {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    .BtnNew {
+        background: green;
+        width: 100%;
+        color: white;
+        font-weight: bold;
+        height: 3rem;
+    }
+}
