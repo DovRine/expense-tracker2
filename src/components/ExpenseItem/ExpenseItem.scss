@@ -1,22 +1,39 @@
 .ExpenseItem {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  height: 2.6rem;
   padding: 1rem 2rem;
   border: solid 1px white;
   align-items: center;
+
   .amount {
+    padding-right: 2em;
     text-align: right;
   }
   .toolbar {
     display: flex;
     justify-content: flex-end;
     gap: 1em;
-    .BtnEdit {
-        background: gold;
+  }
+
+  @media screen and (max-width: 400px) {
+    & {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      border-radius: 0.5rem;
+      border-width: 2px;
+      height: max-content;
+      .amount {
+        padding: 0;
+      }
+      .toolbar {
+        margin: 1rem 0;
+      }
     }
-    .BtnDelete {
-        background: tomato;
-        color: white;
+    & + & {
+      margin-top: 2em;
     }
   }
 }

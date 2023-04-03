@@ -9,12 +9,12 @@ type Props = {
 function CategoryAdmin({setShowCategoryAdmin}: Props) {
   return (
     <div className="CategoryAdmin">
+      <h1>Category Admin</h1>
       <Button
         classes="BtnClose"
         onClick={() => setShowCategoryAdmin(false)}
         label="Close"
       />
-      <h1>Category Admin</h1>
       <CategoriesList />
     </div>
   );

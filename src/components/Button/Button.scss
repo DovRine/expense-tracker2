@@ -6,6 +6,9 @@
   cursor: pointer;
   transition: all 200ms linear;
 
+  &:focus {
+    outline: solid 2px orange;
+  }
   &:hover {
     background: white !important;
     color: black !important;

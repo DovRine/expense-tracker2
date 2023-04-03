@@ -2,6 +2,7 @@ import './CategoryItemForm.scss';
 import {fetchCategories} from '@/lib/fetchCategories';
 import {Category} from '@/models';
 import {Dispatch, SetStateAction, useState} from 'react';
+import {Button} from '../Button';
 
 async function createCategory(category: Category) {
   const url = 'http://localhost:5000/api/category';
@@ -36,15 +37,20 @@ function CategoryItemForm({
         <input
           type="text"
           value={name}
+          placeholder="Category..."
           onChange={e => setName(e.currentTarget.value)}
+          autoFocus={true}
         />
       </div>
-      <div>
-        <button type="button" onClick={() => setShowEditForm(false)}>
-          Cancel
-        </button>
-        <button
-          type="button"
+      <div className="toolbar">
+        <Button
+          classes="BtnCancel"
+          onClick={() => setShowEditForm(false)}
+          label="Cancel"
+        />
+        <Button
+          classes={category ? 'BtnEdit' : 'BtnAdd'}
+          label={category ? 'Edit' : 'Add'}
           onClick={async () => {
             try {
               const categoryData: Category = {name};
@@ -63,9 +69,7 @@ function CategoryItemForm({
               setShowEditForm(false);
             }
           }}
-        >
-          {category ? 'Edit' : 'Add'}
-        </button>
+        />
       </div>
     </div>
   );

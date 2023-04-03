@@ -4,6 +4,8 @@ import {toInteger} from '@/lib/toInteger';
 import {fetchExpenses} from '@/lib/fetchExpenses';
 import {Category, Expense} from '@/models';
 import {Dispatch, SetStateAction, useState, useEffect} from 'react';
+import {NumberSelect} from '../NumberSelect/NumberSelect';
+import {Button} from '../Button';
 
 // NOTE: empty first element to account for months 1-12
 const months = [
@@ -27,6 +29,7 @@ async function listCategories() {
   const response = await fetch(url);
   return (await response.json()) as Category[];
 }
+
 async function createExpense(expense: Expense) {
   const url = 'http://localhost:5000/api/expense';
   await fetch(url, {
@@ -68,7 +71,7 @@ function ExpenseItemForm({
   const currentYear = new Date().getFullYear();
   const yearOptions = [];
   for (let i = year - 7; i <= currentYear; i++) {
-    yearOptions.push({value: i, label: i});
+    yearOptions.push({value: i, label: String(i)});
   }
   const monthOptions = [];
   for (let i = 1; i <= 12; i++) {
@@ -77,35 +80,29 @@ function ExpenseItemForm({
 
   return (
     <div className="ExpenseItemForm">
-      <div>
-        <select
-          name="month"
+      <div className="DateSelects">
+        <NumberSelect
+          classes="MonthSelect"
+          setter={setMonth}
           value={month}
-          onChange={e => setMonth(Number(e.currentTarget.value))}
-        >
-          {monthOptions.map(({label, value}) => (
-            <option key={value} value={value}>
-              {label}
-            </option>
-          ))}
-        </select>
-        <select
-          name="year"
+          name="month"
+          options={monthOptions}
+        />
+        <NumberSelect
+          classes="YearSelect"
+          setter={setYear}
           value={year}
-          onChange={e => setYear(Number(e.currentTarget.value))}
-        >
-          {yearOptions.map(({label, value}) => (
-            <option key={value} value={value}>
-              {label}
-            </option>
-          ))}
-        </select>
+          name="year"
+          options={yearOptions}
+        />
       </div>
       <div>
         <select
+          className="CategorySelect"
           name="category_id"
           value={category_id}
           onChange={e => setCategory_id(Number(e.currentTarget.value))}
+          autoFocus={true}
         >
           {categories.map(category => (
             <option key={category.id} value={category.id}>
@@ -117,17 +114,20 @@ function ExpenseItemForm({
       <div>
         <input
           type="number"
-          step="0.01"
-          value={amount}
-          onChange={e => setAmount(Number(e.currentTarget.value))}
+          step="1"
+          value={toInteger(amount)}
+          onChange={e => setAmount(toInteger(Number(e.currentTarget.value)))}
         />
       </div>
-      <div>
-        <button type="button" onClick={() => setShowEditForm(false)}>
-          Cancel
-        </button>
-        <button
-          type="button"
+      <div className="toolbar">
+        <Button
+          classes="BtnCancel"
+          onClick={() => setShowEditForm(false)}
+          label="Cancel"
+        />
+        <Button
+          classes={expense ? 'BtnEdit' : 'BtnAdd'}
+          label={expense ? 'Edit' : 'Add'}
           onClick={async () => {
             try {
               const expenseData: Expense = {
@@ -151,9 +151,7 @@ function ExpenseItemForm({
               setShowEditForm(false);
             }
           }}
-        >
-          {expense ? 'Edit' : 'Add'}
-        </button>
+        />
       </div>
     </div>
   );

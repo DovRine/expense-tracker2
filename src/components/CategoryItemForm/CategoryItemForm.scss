@@ -1,7 +1,23 @@
 .CategoryItemForm {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  padding: 1rem 2rem;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 1rem;
   border: solid 1px white;
   align-items: center;
+  
+  input {
+    background: black;
+    color: white;
+    border: solid white 1px;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0;
+    font-weight: bold;
+    text-align: center;
+    width: 90%;
+  }
+
+  .toolbar {
+    display: flex;
+    justify-content: space-around;
+  }
 }

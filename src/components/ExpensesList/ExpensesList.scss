@@ -2,6 +2,10 @@
     display: flex;
     flex-direction: column;
     gap: 2em;
+    height: 100vh;
+    .ExpenseItemsWrapper {
+        overflow-y: scroll;
+    }
     .BtnNew {
         background: green;
         width: 100%;

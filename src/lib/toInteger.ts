@@ -6,9 +6,6 @@
  */
 // BUG: trailing zeroes are truncated causing invalid values. This affects the entire design of handling cents as I am.
 function toInteger(amount: number): number {
-  if (!amount) {
-    throw new Error('amount is required');
-  }
   if (typeof amount !== 'number') {
     throw new Error('amount must be a number');
   }

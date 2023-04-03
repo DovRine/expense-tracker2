@@ -20,7 +20,7 @@ function CategoryItem({
   const {name} = category;
 
   return (
-    <div className="CategoryItem">
+    <>
       {showEditForm ? (
         <CategoryItemForm
           category={category}
@@ -28,7 +28,7 @@ function CategoryItem({
           setCategories={setCategories}
         />
       ) : (
-        <>
+        <div className="CategoryItem">
           <div className="name">{name}</div>
           <div className="toolbar">
             <Button
@@ -46,9 +46,9 @@ function CategoryItem({
               label="Delete"
             />
           </div>
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 }
 export {CategoryItem};

@@ -1,7 +1,44 @@
 .ExpenseItemForm {
+  grid-column: 1/5;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  padding: 1rem 2rem;
   border: solid 1px white;
-  align-items: center;
+  padding: 1em;
+
+  input, .CategorySelect {
+    background: black;
+    color: white;
+    border: solid white 1px;
+    padding: 0.25rem 1rem;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+  }
+
+  .CategorySelect {
+    width: 100%;
+  }
+  .DateSelects {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .toolbar {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  @media screen and (max-width: 400px) {
+    & {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      border-radius: 0.5rem;
+      border-width: 2px;
+      height: max-content;
+      .toolbar {
+        margin: 1rem 0;
+      }
+    }
+  }
 }

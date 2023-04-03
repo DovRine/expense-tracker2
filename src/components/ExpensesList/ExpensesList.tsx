@@ -27,7 +27,7 @@ function ExpensesList() {
           label="New"
         />
       )}
-      <div>
+      <div className="ExpenseItemsWrapper">
         {expenses.map(expense => (
           <ExpenseItem
             key={expense.id}
