@@ -9,6 +9,7 @@ async function listCategories(): Promise<Category[]> {
   const query = /*sql*/ `
     SELECT id, name
     FROM categories
+    ORDER by name ASC
     `;
 
   const {rows} = await db.query(query);

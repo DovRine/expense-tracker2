@@ -7,7 +7,7 @@ type Props = {
   name: string;
   options: {value: string | number; label: string}[];
   value: number;
-  setter: (value: SetStateAction<any>) => void;
+  setter: (value: SetStateAction<number>) => void;
 };
 function NumberSelect({classes, setter, options, name, value}: Props) {
   return (

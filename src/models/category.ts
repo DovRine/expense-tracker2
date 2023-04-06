@@ -3,4 +3,4 @@ type Category = {
   name: string;
 };
 
-export {Category};
+export type {Category};

@@ -1,1 +1,1 @@
-export { Select } from './Select'
+export {NumberSelect} from './NumberSelect';

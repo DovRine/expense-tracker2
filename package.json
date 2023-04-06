@@ -12,7 +12,9 @@
     "compile": "tsc",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "posttest": "npm run lint"
+    "posttest": "npm run lint",
+    "test": "echo \"not implemented\"",
+    "validate": "npm run lint:fix && npm run test && npm run clean && npm run build"
   },
   "dependencies": {
     "@types/node": "18.15.11",
