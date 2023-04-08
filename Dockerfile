@@ -25,6 +25,7 @@ ENV DB_NAME ${DB_NAME}
 
 ENV NEXT_TELEMETRY_DISABLED=1
 WORKDIR /usr/src/app
+COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
 COPY --chown=node:node --from=build /usr/src/app/node_modules /usr/sr/app/node_modules
 COPY --chown=node:node . /usr/src/app
 USER node
