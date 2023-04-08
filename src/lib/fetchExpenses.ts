@@ -5,7 +5,7 @@ import {cache} from 'react';
 type FetchExpenses = (cacheBuster?: string | number) => Promise<Expense[]>;
 
 async function doFetch(cacheBuster?: string | number): Promise<Expense[]> {
-  const url = `http://localhost:5000/api/expense?q=${cacheBuster ?? ''}`;
+  const url = `/api/expense?q=${cacheBuster ?? ''}`;
   return fetch(url).then(res => res.json());
 }
 

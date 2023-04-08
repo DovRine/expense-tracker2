@@ -25,13 +25,13 @@ const months = [
 ];
 
 async function listCategories() {
-  const url = 'http://localhost:5000/api/category';
+  const url = '/api/category';
   const response = await fetch(url);
   return (await response.json()) as Category[];
 }
 
 async function createExpense(expense: Expense) {
-  const url = 'http://localhost:5000/api/expense';
+  const url = '/api/expense';
   await fetch(url, {
     method: 'POST',
     body: JSON.stringify(expense),
@@ -39,7 +39,7 @@ async function createExpense(expense: Expense) {
 }
 
 async function updateExpense(expense: Expense) {
-  const url = `http://localhost:5000/api/expense/${expense.id}`;
+  const url = `/api/expense/${expense.id}`;
   await fetch(url, {
     method: 'PUT',
     body: JSON.stringify(expense),

@@ -5,7 +5,7 @@ import {Dispatch, SetStateAction, useState} from 'react';
 import {Button} from '../Button';
 
 async function createCategory(category: Category) {
-  const url = 'http://localhost:5000/api/category';
+  const url = '/api/category';
   await fetch(url, {
     method: 'POST',
     body: JSON.stringify(category),
@@ -13,7 +13,7 @@ async function createCategory(category: Category) {
 }
 
 async function updateCategory(category: Category) {
-  const url = `http://localhost:5000/api/category/${category.id}`;
+  const url = `/api/category/${category.id}`;
   await fetch(url, {
     method: 'PUT',
     body: JSON.stringify(category),

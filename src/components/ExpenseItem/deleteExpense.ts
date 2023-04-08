@@ -1,6 +1,6 @@
 async function deleteExpense(id: number) {
   try {
-    await fetch(`http://localhost:5000/api/expense/${id}`, {
+    await fetch(`/api/expense/${id}`, {
       method: 'DELETE',
     });
   } catch (e) {
