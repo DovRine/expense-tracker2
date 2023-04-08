@@ -1,1 +1,1 @@
-alias dc="$(which) docker-compose -f docker-compose.yml"
+alias dc="$(which) docker-compose -f docker-compose.yml -f docker-compose.dev.yml"

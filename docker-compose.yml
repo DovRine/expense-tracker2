@@ -8,10 +8,18 @@ services:
     networks:
       - backend_db
     expose:
-      - 3000
+      - ${PORT}
     ports:
-      - ${PORT}:3000
+      - ${PORT}:${PORT}
     restart: always
+    environment:
+      - NODE_ENV=production
+      - PORT=${PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
+    command: [ "dumb-init", "node_modules/.bin/next", "start" ]
   db:
     image: postgres:12
     container_name: expense_tracker_db
@@ -31,7 +39,6 @@ services:
 
 networks:
   backend_db:
-
 
 volumes:
   db_data:

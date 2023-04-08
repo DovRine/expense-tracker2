@@ -1,0 +1,13 @@
+node_modules/
+.editorconfig
+.env.example
+.eslintignore
+.eslintrc.json
+.prettierrc.js
+docker-compose*
+Dockerfile
+next-env.d.ts
+README.md
+tsconfig.tsbuildinfo
+.dockerignore
+.env

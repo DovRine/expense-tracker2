@@ -1,48 +1,30 @@
-FROM node:18 AS base
-
-# Install dependencies only when needed
-FROM base AS deps
-WORKDIR /app
-
-COPY package*.json ./
+FROM node:latest AS build
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    dumb-init \
+    libpq-dev \
+    postgresql-13
+RUN npm install -g node-gyp
+# build-essential \
+# python3
+WORKDIR /usr/src/app
+COPY package*.json /usr/src/app
+# TODO: make this dependent on $NODE_ENV
 RUN npm ci
 
-# Rebuild the source code only when needed
-FROM base AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
+FROM node:18.15.0-bullseye-slim
+ARG NODE_ENV
+ENV NODE_ENV ${NODE_ENV}
+ENV HOST ${HOST}
+ENV PORT ${PORT}
+# NOTE: must be named DB_PASSWORD for the docker image
+ENV DB_PASSWORD ${DB_PASSWORD}
+ENV DB_PORT ${DB_PORT}
+ENV DB_USER ${DB_USER}
+ENV DB_HOST ${DB_HOST}
+ENV DB_NAME ${DB_NAME}
 
-# Next.js collects completely anonymous telemetry data about general usage.
-# Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line in case you want to disable telemetry during the build.
-ENV NEXT_TELEMETRY_DISABLED 1
-
-# If using npm comment out above and use below instead
-RUN npm run build
-
-# Production image, copy all the files and run next
-FROM base AS runner
-WORKDIR /app
-
-ENV NODE_ENV production
-# Uncomment the following line in case you want to disable telemetry during runtime.
-ENV NEXT_TELEMETRY_DISABLED 1
-
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
-COPY --from=builder /app/public ./public
-
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-USER nextjs
-
-EXPOSE 3000
-
-ENV PORT 3000
-
-CMD ["node", "server.js"]
+ENV NEXT_TELEMETRY_DISABLED=1
+WORKDIR /usr/src/app
+COPY --chown=node:node --from=build /usr/src/app/node_modules /usr/sr/app/node_modules
+COPY --chown=node:node . /usr/src/app
+USER node
