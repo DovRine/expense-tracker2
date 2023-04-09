@@ -8,6 +8,7 @@ RUN npm install -g node-gyp
 WORKDIR /usr/src/app
 COPY package*.json /usr/src/app
 RUN npm ci --only=production
+RUN npm run build
 
 FROM node:18.15.0-bullseye-slim
 ARG NODE_ENV
@@ -35,5 +36,6 @@ ENV NEXT_TELEMETRY_DISABLED=1
 WORKDIR /usr/src/app
 COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
 COPY --chown=node:node --from=build /usr/src/app/node_modules /usr/sr/app/node_modules
+COPY --chown=node:node --from=build /usr/src/app/.next /usr/src/app/.next
 COPY --chown=node:node . /usr/src/app
 USER node
