@@ -41,7 +41,6 @@ ENV NEXT_TELEMETRY_DISABLED=1
 WORKDIR /usr/src/app
 COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
 COPY --chown=node:node ./src /usr/src/app/src
-COPY --chown=node:node ./public /usr/src/app/public
 COPY --chown=node:node ./next.config.js /usr/src/app/next.config.js
 COPY --chown=node:node ./package.json /usr/src/app/package.json
 COPY --chown=node:node --from=build /usr/src/app/node_modules /usr/src/app/node_modules
