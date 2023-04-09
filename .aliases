@@ -1,3 +1,4 @@
-alias dc="$(which docker-compose) -f docker-compose.yml -f docker-compose.dev.yml"
+alias dc="$(which docker-compose) -f docker-compose.yml"
+alias dcdev="$(which docker-compose) -f docker-compose.yml -f docker-compose.dev.yml"
 alias dclogs="dc logs -f"
 alias dcla="dclogs app"

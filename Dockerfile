@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN npm install -g node-gyp
 
 WORKDIR /usr/src/app
-COPY package*.json /usr/src/app
+COPY . /usr/src/app
 RUN npm ci --only=production
 RUN npm run build
 
@@ -37,5 +37,4 @@ WORKDIR /usr/src/app
 COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
 COPY --chown=node:node --from=build /usr/src/app/node_modules /usr/sr/app/node_modules
 COPY --chown=node:node --from=build /usr/src/app/.next /usr/src/app/.next
-COPY --chown=node:node . /usr/src/app
 USER node
