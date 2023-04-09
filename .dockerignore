@@ -8,7 +8,7 @@ doc/
 .eslintrc.json
 .prettierrc.js
 docker-compose*
-Dockerfile
+Dockerfile*
 next-env.d.ts
 README.md
 tsconfig.tsbuildinfo

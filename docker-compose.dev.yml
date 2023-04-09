@@ -1,9 +1,17 @@
 services:
   app:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.dev
     environment:
       - NODE_ENV=development
+      - PORT=${PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
+      - NEXT_PUBLIC_BACKEND_HOST=app
+      - NEXT_PUBLIC_PORT=${PORT}
     volumes:
-      - ./public:/app/public
-      - ./src:/app/src
-      - .env:/app/.env
-    command: ["npm", "run", "dev"]
+      - ./:/usr/src/app
+    command: [ "npm", "run", "dev" ]

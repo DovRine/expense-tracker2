@@ -19,6 +19,8 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_HOST=${DB_HOST}
       - DB_NAME=${DB_NAME}
+      - NEXT_PUBLIC_BACKEND_HOST=app
+      - NEXT_PUBLIC_PORT=${PORT}
     command: [ "dumb-init", "node_modules/.bin/next", "start" ]
   db:
     image: postgres:12

@@ -1,4 +1,4 @@
-FROM node:18 AS build
+FROM node:latest AS build
 RUN apt-get update && apt-get install -y --no-install-recommends \
     dumb-init \
     libpq-dev \
@@ -7,7 +7,8 @@ RUN npm install -g node-gyp
 
 WORKDIR /usr/src/app
 COPY package*.json /usr/src/app
-RUN npm ci --only=production
+# TODO: make this dependent on $NODE_ENV
+RUN npm ci
 
 FROM node:18.15.0-bullseye-slim
 ARG NODE_ENV
@@ -35,5 +36,4 @@ ENV NEXT_TELEMETRY_DISABLED=1
 WORKDIR /usr/src/app
 COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
 COPY --chown=node:node --from=build /usr/src/app/node_modules /usr/sr/app/node_modules
-COPY --chown=node:node . /usr/src/app
 USER node

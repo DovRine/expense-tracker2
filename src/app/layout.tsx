@@ -1,7 +1,7 @@
 import './globals.scss';
 
 export const metadata = {
-  title: 'Expense Tracker',
+  title: 'Expense Tracker2',
   description: '',
 };
 
