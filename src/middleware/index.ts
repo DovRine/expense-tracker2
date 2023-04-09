@@ -1,1 +1,0 @@
-export { corsMiddleware } from './corsMiddleware'

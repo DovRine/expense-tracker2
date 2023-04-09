@@ -1,15 +1,20 @@
+# ------------- stage 1 --------------- #
 FROM node:18 AS build
 RUN apt-get update && apt-get install -y --no-install-recommends \
     dumb-init \
     libpq-dev \
     postgresql-13
 RUN npm install -g node-gyp
+ENV NEXT_TELEMETRY_DISABLED=1
 
 WORKDIR /usr/src/app
 COPY . /usr/src/app
-RUN npm ci --only=production
+RUN npm ci
 RUN npm run build
 
+# ------------ end stage 1 ------------ #
+
+# -------------- stage 2 -------------- #
 FROM node:18.15.0-bullseye-slim
 ARG NODE_ENV
 ARG BACKEND_HOST
@@ -35,6 +40,11 @@ ENV NEXT_PUBLIC_PORT ${PORT}
 ENV NEXT_TELEMETRY_DISABLED=1
 WORKDIR /usr/src/app
 COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
-COPY --chown=node:node --from=build /usr/src/app/node_modules /usr/sr/app/node_modules
+COPY --chown=node:node ./src /usr/src/app/src
+COPY --chown=node:node ./public /usr/src/app/public
+COPY --chown=node:node ./next.config.js /usr/src/app/next.config.js
+COPY --chown=node:node ./package.json /usr/src/app/package.json
+COPY --chown=node:node --from=build /usr/src/app/node_modules /usr/src/app/node_modules
 COPY --chown=node:node --from=build /usr/src/app/.next /usr/src/app/.next
 USER node
+# ----------------- end stage 2 ----------------- #

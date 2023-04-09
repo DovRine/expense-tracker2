@@ -4,6 +4,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq-dev \
     postgresql-13
 RUN npm install -g node-gyp
+ENV NEXT_TELEMETRY_DISABLED=1
 
 WORKDIR /usr/src/app
 COPY package*.json /usr/src/app
