@@ -67,7 +67,9 @@ function ExpenseItemForm({
   const [category_id, setCategory_id] = useState(
     expense ? expense.category_id : 1
   );
-  const [amount, setAmount] = useState(expense ? expense.amount : 0);
+  const [amount, setAmount] = useState<number | string>(
+    expense ? expense.amount : ''
+  );
   const currentYear = new Date().getFullYear();
   const yearOptions = [];
   for (let i = year - 7; i <= currentYear; i++) {
@@ -78,6 +80,7 @@ function ExpenseItemForm({
     monthOptions.push({value: i, label: `${i} ${months[i]}`});
   }
 
+  console.log('amount', toInteger(amount));
   return (
     <div className="ExpenseItemForm">
       <div className="DateSelects">
@@ -113,8 +116,6 @@ function ExpenseItemForm({
       </div>
       <div>
         <input
-          type="number"
-          step="1"
           value={toInteger(amount)}
           onChange={e => setAmount(toInteger(Number(e.currentTarget.value)))}
         />
@@ -133,7 +134,7 @@ function ExpenseItemForm({
               const expenseData: Expense = {
                 year,
                 month,
-                amount: toInteger(amount),
+                amount: Number(toInteger(amount)),
                 category_id,
               };
               if (expense) {

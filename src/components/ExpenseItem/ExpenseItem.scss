@@ -2,7 +2,7 @@
   position: relative;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  height: 2.6rem;
+  height: max-content;
   padding: 1rem 2rem;
   border: solid 1px white;
   align-items: center;
@@ -15,9 +15,12 @@
     display: flex;
     justify-content: flex-end;
     gap: 1em;
+    button {
+      font-size: 0.8em;
+    }
   }
 
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 932px) {
     & {
       display: flex;
       flex-direction: column;
@@ -25,6 +28,7 @@
       border-radius: 0.5rem;
       border-width: 2px;
       height: max-content;
+      font-size: 2.5em;
       .amount {
         padding: 0;
       }
