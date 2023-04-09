@@ -116,6 +116,7 @@ function ExpenseItemForm({
       </div>
       <div>
         <input
+          inputMode="numeric"
           value={toInteger(amount)}
           onChange={e => setAmount(toInteger(Number(e.currentTarget.value)))}
         />
