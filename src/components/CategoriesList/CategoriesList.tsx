@@ -28,7 +28,7 @@ function CategoriesList() {
           label="New"
         />
       )}
-      <div>
+      <div className="CategoryItemsWrapper">
         {categories.map(category => (
           <CategoryItem
             key={category.id}

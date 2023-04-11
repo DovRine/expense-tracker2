@@ -1,12 +1,16 @@
 .CategoriesList {
-    display: flex;
-    flex-direction: column;
-    gap: 2em;
-    .BtnNew {
-        background: green;
-        width: 100%;
-        color: white;
-        font-weight: bold;
-        height: 3rem;
-    }
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  .CategoryItemsWrapper {
+    overflow-y: scroll;
+    height: 59vh;
+  }
+  .BtnNew {
+    background: green;
+    width: 100%;
+    color: white;
+    font-weight: bold;
+    height: 3rem;
+  }
 }
