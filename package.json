@@ -16,7 +16,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "eslint": "8.37.0",
-    "eslint-config-next": "13.2.4",
+    "eslint-config-next": "13.4.4",
     "next": "13.2.4",
     "pg": "^8.10.0",
     "pg-native": "^3.0.1",
