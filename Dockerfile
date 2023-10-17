@@ -15,7 +15,7 @@ RUN npm run build
 # ------------ end stage 1 ------------ #
 
 # -------------- stage 2 -------------- #
-FROM node:18.15.0-bullseye-slim
+FROM node:18.18.2-bullseye-slim
 ARG NODE_ENV
 ARG BACKEND_HOST
 ARG PORT
